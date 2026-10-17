@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fbf8f1">
+  <title>혜택온 — 매일 아끼는 편의점 구독</title>
+  <style>
+    :root{--ink:#20251f;--muted:#667066;--green:#176b4b;--green-dark:#10543a;--lime:#d9f36a;--cream:#fbf8f1;--paper:#fff;--line:#e6e9df;--orange:#ffb46b;--shadow:0 18px 50px rgba(28,52,37,.09)}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--cream);color:var(--ink);font-family:system-ui,-apple-system,'Apple SD Gothic Neo','Nanum Gothic',sans-serif;line-height:1.55}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+    .wrap{width:min(1120px,calc(100% - 40px));margin:auto}
+    .nav{height:76px;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:900;letter-spacing:-.7px}
+    .brand-mark{width:34px;height:34px;border-radius:12px;background:var(--green);color:var(--lime);display:grid;place-items:center;font-size:19px}
+    .nav-link{font-size:14px;font-weight:750;color:#4f5b50}
+    .nav-cta{background:var(--green);color:white;padding:11px 17px;border-radius:999px;font-size:14px;font-weight:800}
+    .hero{padding:40px 0 72px;display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:center;min-height:520px}
+    .eyebrow{display:inline-flex;gap:8px;align-items:center;background:#eef5d2;color:var(--green-dark);border-radius:99px;padding:8px 13px;font-size:13px;font-weight:800}
+    .eyebrow i{display:block;width:7px;height:7px;background:#76a938;border-radius:50%}
+    h1{font-size:clamp(42px,6.2vw,72px);line-height:1.08;letter-spacing:-3.7px;margin:22px 0 18px}
+    h1 em{font-style:normal;color:var(--green)}
+    .hero-copy{max-width:520px;color:#606b60;font-size:18px;margin:0 0 28px}
+    .primary{border:0;border-radius:15px;background:var(--green);color:white;padding:16px 22px;font-weight:850;font-size:16px;cursor:pointer;box-shadow:0 9px 20px rgba(23,107,75,.2);transition:.2s}
+    .primary:hover{background:var(--green-dark);transform:translateY(-2px)}
+    .primary .free{color:var(--lime)}
+    .micro{font-size:12px;color:#788178;margin:12px 0 0}
+    .visual{position:relative;min-height:390px;border-radius:34px;background:#e8f0d2;overflow:hidden;display:grid;place-items:center}
+    .visual::before,.visual::after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.45)}
+    .visual::before{width:290px;height:290px;right:-70px;top:-96px}.visual::after{width:190px;height:190px;left:-50px;bottom:-60px}
+    .phone{z-index:1;width:min(260px,72%);padding:14px;border:7px solid #26342b;border-radius:34px;background:#fff;box-shadow:0 25px 50px rgba(34,56,40,.22);transform:rotate(3deg)}
+    .phone-top{height:16px;width:70px;border-radius:0 0 12px 12px;background:#26342b;margin:-14px auto 15px}
+    .app-head{display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:850}.app-logo{color:var(--green);font-size:17px}
+    .saving{margin:18px 0 11px;background:var(--green);border-radius:18px;color:#fff;padding:16px}.saving small{opacity:.8;font-size:10px}.saving strong{display:block;font-size:25px;margin-top:4px}.saving span{font-size:10px;color:var(--lime)}
+    .app-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #edf0e9;font-size:11px;font-weight:750}.app-icon{width:32px;height:32px;border-radius:11px;background:#eff5d9;display:grid;place-items:center;font-size:16px}
+    .app-bar{margin:16px 0 4px;padding:11px;border-radius:11px;background:var(--lime);font-size:10px;font-weight:900;text-align:center}
+    .float-note{position:absolute;z-index:2;right:6%;bottom:12%;background:white;border-radius:15px;padding:12px 16px;box-shadow:var(--shadow);font-size:12px;font-weight:800;transform:rotate(-4deg)}
+    .float-note b{color:var(--green);font-size:17px}
+    .section{padding:76px 0}
+    .section-head{text-align:center;max-width:650px;margin:0 auto 38px}
+    .kicker{color:var(--green);font-size:13px;letter-spacing:1px;text-transform:uppercase;font-weight:900}
+    h2{font-size:clamp(30px,4vw,44px);line-height:1.18;letter-spacing:-1.8px;margin:10px 0 12px}
+    .section-head p{margin:0;color:var(--muted)}
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .feature{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:24px;min-height:218px}
+    .feature-icon{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;background:#eff5d9;font-size:22px;margin-bottom:18px}
+    .feature h3{font-size:19px;letter-spacing:-.5px;margin:0 0 8px}.feature p{color:var(--muted);font-size:14px;margin:0}.feature strong{color:var(--green)}
+    .pricing-section{background:#f1f4e9}
+    .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch}
+    .plan{position:relative;border:1px solid var(--line);border-radius:24px;padding:25px;background:white;display:flex;flex-direction:column;min-height:350px}
+    .plan.recommended{border:2px solid var(--green);box-shadow:0 16px 38px rgba(23,107,75,.12);transform:translateY(-8px)}
+    .badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);white-space:nowrap;border-radius:99px;background:var(--lime);color:#1e3a24;padding:7px 14px;font-size:12px;font-weight:900}
+    .plan-name{font-size:18px;font-weight:900;margin-bottom:8px}.plan-price{font-size:34px;letter-spacing:-1px;font-weight:950}.plan-price small{font-size:13px;color:var(--muted);font-weight:650;letter-spacing:0}
+    .plan-desc{margin:9px 0 17px;color:#576257;font-size:14px;min-height:42px}
+    .plan-target{background:#f7f8f3;padding:11px 12px;border-radius:12px;font-size:12px;color:#566156;margin-bottom:19px}.plan-target b{color:var(--green)}
+    .subscribe{margin-top:auto;border:1px solid #b6c7b9;background:#fff;color:var(--green);border-radius:12px;padding:13px;font-weight:850;cursor:pointer;transition:.18s}
+    .subscribe:hover{background:#eff5d9;border-color:var(--green)}.recommended .subscribe{background:var(--green);color:#fff;border-color:var(--green)}.recommended .subscribe:hover{background:var(--green-dark)}
+    .status{min-height:22px;margin:10px 0 0;text-align:center;font-size:12px;color:var(--green);font-weight:800}
+    .savings-section{padding:48px 0 66px;background:#f1f4e9}.savings-wrap{background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px;overflow-x:auto}.savings-table{width:100%;border-collapse:collapse;min-width:690px;text-align:left}.savings-table th,.savings-table td{padding:14px 15px;border-bottom:1px solid var(--line);vertical-align:top}.savings-table th{font-size:13px;color:var(--green-dark);background:#f4f7eb}.savings-table td{font-size:14px}.savings-table tr:last-child td{border-bottom:0}.formula{font-weight:800;color:var(--green);white-space:nowrap}.calc-note{font-size:12px;line-height:1.7;color:var(--muted);margin:15px 3px 0}.reviews-section{padding:60px 0 24px}.reviews{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.review{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px}.review-stars{color:#d38b18;font-size:14px;letter-spacing:2px}.review blockquote{margin:10px 0 16px;font-size:14px;font-weight:700;line-height:1.65}.review cite{font-style:normal;color:var(--muted);font-size:12px}.review-disclaimer{text-align:center;color:#788178;font-size:12px;margin:-25px auto 28px}.free-band{padding:56px 0}.free-box{background:var(--green);color:white;border-radius:28px;padding:38px 44px;display:flex;justify-content:space-between;align-items:center;gap:25px;overflow:hidden;position:relative}.free-box::after{content:"";width:220px;height:220px;border:34px solid rgba(217,243,106,.12);border-radius:50%;position:absolute;right:25%;top:-130px}.free-box h2{font-size:clamp(28px,4vw,40px);margin:0 0 7px;letter-spacing:-1.5px}.free-box p{margin:0;color:#dce9df;font-size:14px}.free-box .primary{background:var(--lime);color:#1f3322;white-space:nowrap;position:relative;z-index:1}.free-box .primary:hover{background:#e7ff8b}.free-box .primary .free{color:var(--green)}
+    .savings-calculator{background:#fff;border:1px solid var(--line);border-radius:24px;padding:25px;box-shadow:var(--shadow)}.calc-controls{display:grid;grid-template-columns:1fr 1fr;gap:14px}.input-card{background:#f7f8f3;border-radius:15px;padding:15px}.input-card label{display:block;font-size:13px;font-weight:850;margin-bottom:8px}.input-line{display:flex;align-items:center;gap:8px}.input-line input{width:100%;min-width:0;border:1px solid #cdd5c9;border-radius:10px;padding:11px 12px;background:#fff;font:inherit;font-weight:750}.input-line span{font-size:12px;color:var(--muted);white-space:nowrap}.range-card{grid-column:1/-1}.range-top{display:flex;justify-content:space-between;gap:12px;align-items:center;font-size:13px;font-weight:850}.range-top output{color:var(--green)}input[type=range]{width:100%;accent-color:var(--green);margin:13px 0 3px}.calc-hint{font-size:12px;color:var(--muted);margin:14px 0 0}.chart{margin-top:24px;border-top:1px solid var(--line);padding-top:20px}.chart-legend{display:flex;gap:18px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-bottom:14px}.legend-key{display:inline-flex;align-items:center;gap:7px}.swatch{width:11px;height:11px;border-radius:3px;background:#a8b5a8}.swatch.plan{background:var(--green)}.chart-row{padding:15px 0;border-bottom:1px solid #eef0e9}.chart-row:last-child{border-bottom:0}.chart-title{display:flex;justify-content:space-between;gap:12px;align-items:baseline;margin-bottom:10px}.chart-title strong{font-size:14px}.chart-title span{font-size:12px;font-weight:800;color:var(--green)}.bar-line{display:grid;grid-template-columns:100px 1fr auto;align-items:center;gap:9px;margin:7px 0;font-size:11px}.bar-track{height:13px;border-radius:99px;background:#f0f2ed;overflow:hidden}.bar-fill{height:100%;width:0;border-radius:inherit;background:#a8b5a8;transition:width .5s ease}.bar-fill.plan{background:var(--green)}.bar-value{font-variant-numeric:tabular-nums;font-weight:800;min-width:83px;text-align:right}.chart-placeholder{padding:26px 12px;text-align:center;border-radius:14px;background:#f7f8f3;color:var(--muted);font-size:13px}.calc-note{font-size:12px;line-height:1.7;color:var(--muted);margin:15px 3px 0}.checkout-backdrop{position:fixed;inset:0;z-index:30;background:rgba(17,28,20,.52);display:grid;place-items:center;padding:18px;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}.checkout-backdrop.open{opacity:1;visibility:visible}.checkout-dialog{width:min(440px,100%);background:#fff;border-radius:24px;padding:26px;box-shadow:0 25px 90px rgba(10,25,15,.3);transform:translateY(22px) scale(.97);transition:transform .32s cubic-bezier(.2,.8,.2,1);position:relative}.checkout-backdrop.open .checkout-dialog{transform:translateY(0) scale(1)}.checkout-close{position:absolute;right:17px;top:15px;border:0;background:#f2f4ef;width:36px;height:36px;border-radius:50%;font-size:20px;cursor:pointer}.checkout-kicker{font-size:12px;font-weight:900;color:var(--green);letter-spacing:.5px}.checkout-dialog h2{font-size:28px;margin:8px 0 18px}.checkout-plan{border-radius:15px;background:#f4f7eb;padding:16px;display:flex;justify-content:space-between;gap:12px;align-items:center}.checkout-plan strong{font-size:16px}.checkout-plan span{color:var(--green);font-weight:900}.checkout-note{font-size:12px;line-height:1.65;color:var(--muted);margin:16px 0}.checkout-actions{display:flex;gap:10px}.checkout-actions button{flex:1;border-radius:12px;padding:13px;font-weight:850;cursor:pointer}.checkout-confirm{border:0;background:var(--green);color:#fff}.checkout-cancel{border:1px solid var(--line);background:#fff;color:#4e5a50}.faq-section{padding-top:54px;padding-bottom:84px}.faq-list{max-width:790px;margin:auto}.faq-list details{background:white;border:1px solid var(--line);border-radius:16px;margin:10px 0;padding:0 20px}.faq-list summary{list-style:none;cursor:pointer;padding:19px 28px 19px 0;font-weight:850;position:relative}.faq-list summary::-webkit-details-marker{display:none}.faq-list summary::after{content:"＋";position:absolute;right:0;color:var(--green);font-size:19px;top:15px}.faq-list details[open] summary::after{content:"−"}.faq-list details p{font-size:14px;color:var(--muted);margin:0;padding:0 0 20px;max-width:680px}
+    footer{border-top:1px solid var(--line);padding:23px 0 32px;color:#788178;font-size:12px}.footer-inner{display:flex;justify-content:space-between;gap:16px;align-items:center}.footer-brand{font-weight:900;color:#4b584d}
+    .toast{position:fixed;left:50%;bottom:24px;z-index:10;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#202b23;color:white;border-radius:14px;padding:13px 19px;box-shadow:var(--shadow);font-size:14px;font-weight:750;transition:.25s;text-align:center;width:max-content;max-width:calc(100% - 32px)}.toast.show{opacity:1;transform:translate(-50%,0)}
+    @media(max-width:760px){.nav{height:66px}.nav-link{display:none}.hero{grid-template-columns:1fr;gap:30px;padding:40px 0 55px}.hero-copy{font-size:16px}.visual{min-height:340px}.features,.plans{grid-template-columns:1fr}.reviews{grid-template-columns:1fr 1fr}.plan.recommended{transform:none;margin-top:8px}.feature{min-height:0}.section{padding:58px 0}.free-box{padding:30px 24px;align-items:flex-start;flex-direction:column}.free-box .primary{width:100%}.footer-inner{align-items:flex-start;flex-direction:column}}
+    @media(max-width:600px){.calc-controls{grid-template-columns:1fr}.range-card{grid-column:auto}.savings-calculator{padding:17px}.bar-line{grid-template-columns:75px 1fr auto;gap:6px}.bar-value{min-width:69px;font-size:10px}.checkout-dialog{padding:23px 19px}}@media(max-width:480px){.reviews{grid-template-columns:1fr}.savings-wrap{padding:15px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
+  </style>
+</head>
+<body>
+  <header class="wrap nav">
+    <a class="brand" href="#top" aria-label="혜택온 홈"><span class="brand-mark">온</span>혜택온</a>
+    <a class="nav-link" href="#plans">내게 맞는 구독 찾기</a>
+    <a class="nav-cta" href="#free-trial">첫 달 무료 체험</a>
+  </header>
+  <main id="top">
+    <section class="wrap hero" aria-labelledby="hero-title">
+      <div>
+        <span class="eyebrow"><i></i> 대학생의 편의점 소비를 가볍게</span>
+        <h1 id="hero-title">매일 가는 편의점,<br>매일 아끼는 구독<br><em>혜택온</em></h1>
+        <p class="hero-copy">커피부터 도시락까지, 월 구독 한 번으로 등굣길 소비가 달라집니다.</p>
+        <button class="primary trial-button" type="button">지금 무료 체험 시작하기 <span class="free">(첫 달 0원)</span></button>
+        <p class="micro">커피·도시락 혜택을 앱 바코드 하나로 간편하게</p>
+      </div>
+      <div class="visual" aria-label="혜택온 앱에서 이번 달 절약 금액과 구독 혜택을 확인하는 모습">
+        <div class="phone">
+          <div class="phone-top"></div>
+          <div class="app-head"><span class="app-logo">혜택온</span><span>이번 달 내 혜택</span></div>
+          <div class="saving"><small>이번 달 아낀 금액</small><strong>12,400원</strong><span>혜택이 차곡차곡 쌓이는 중!</span></div>
+          <div class="app-row"><span class="app-icon">☕</span><span>오늘의 커피 할인</span><b>40%</b></div>
+          <div class="app-row"><span class="app-icon">🥪</span><span>도시락·샌드위치</span><b>20%</b></div>
+          <div class="app-bar">앱 바코드로 3초 사용</div>
+        </div>
+        <div class="float-note">매일 쓰는 혜택<br><b>앱에서 바로 확인</b></div>
+      </div>
+    </section>
+    <section class="section wrap" aria-labelledby="benefits-title">
+      <div class="section-head"><span class="kicker">Everyday perks</span><h2 id="benefits-title">매일 쓰는 혜택만<br>가볍게 구독해요</h2><p>자주 사는 커피와 점심, 앱 하나로 간편하게 할인받으세요.</p></div>
+      <div class="features">
+        <article class="feature"><div class="feature-icon" aria-hidden="true">☕</div><h3>매일 커피 구독</h3><p>월 <strong>4,900원</strong>으로 아메리카노를 매일 1잔 <strong>40% 할인</strong>. 출근길·등교길 커피값 부담을 덜어줘요.</p></article>
+        <article class="feature"><div class="feature-icon" aria-hidden="true">🥪</div><h3>점심 도시락 구독</h3><p>월 <strong>3,900원</strong>으로 도시락·샌드위치를 매일 1개 <strong>20% 할인</strong>. 시험 기간 식비 방어의 필수템.</p></article>
+        <article class="feature"><div class="feature-icon" aria-hidden="true">📱</div><h3>앱에서 3초 사용</h3><p>결제도 사용도 앱 바코드 하나로 끝. 이번 달 아낀 금액을 앱에서 실시간으로 확인해요.</p></article>
+      </div>
+    </section>
+    <section class="section pricing-section" id="plans" aria-labelledby="plans-title">
+      <div class="wrap">
+        <div class="section-head"><span class="kicker">Choose your plan</span><h2 id="plans-title">내 생활에 맞는 구독을 골라봐요</h2><p>구독 버튼을 누르면 신청 접수 안내가 표시됩니다.</p></div>
+        <div class="plans">
+          <article class="plan">
+            <div class="plan-name">커피 플랜</div><div class="plan-price">4,900원 <small>/ 월</small></div>
+            <p class="plan-desc">아메리카노 매일 1잔 40% 할인</p><div class="plan-target"><b>추천 대상</b> · 매일 커피 마시는 통학러</div>
+            <button class="subscribe" type="button" data-plan="커피 플랜" data-price="4,900원">커피 플랜 구독하기</button><p class="status" aria-live="polite"></p>
+          </article>
+          <article class="plan">
+            <div class="plan-name">도시락 플랜</div><div class="plan-price">3,900원 <small>/ 월</small></div>
+            <p class="plan-desc">도시락·샌드위치 매일 1개 20% 할인</p><div class="plan-target"><b>추천 대상</b> · 점심을 편의점에서 해결하는 자취생</div>
+            <button class="subscribe" type="button" data-plan="도시락 플랜" data-price="3,900원">도시락 플랜 구독하기</button><p class="status" aria-live="polite"></p>
+          </article>
+          <article class="plan recommended">
+            <span class="badge">대학생 추천 · 커피+도시락 올인원</span>
+            <div class="plan-name">올인원 플랜</div><div class="plan-price">7,900원 <small>/ 월</small></div>
+            <p class="plan-desc">커피 + 도시락 혜택 전부</p><div class="plan-target"><b>추천 대상</b> · 하루 두 번 이상 방문하는 헤비 유저</div>
+            <button class="subscribe" type="button" data-plan="올인원 플랜" data-price="7,900원">추천 플랜 구독하기</button><p class="status" aria-live="polite"></p>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section class="savings-section" aria-labelledby="savings-title">
+      <div class="wrap">
+        <div class="section-head"><span class="kicker">20 uses / month</span><h2 id="savings-title">앱으로 구독하면 얼마나 달라질까요?</h2><p>상품 정가를 입력해 앱 미사용과 구독 이용 시의 월 지출을 그래프로 비교해보세요.</p></div>
+        <div class="savings-calculator">
+          <div class="calc-controls">
+            <div class="input-card"><label for="coffeePrice">아메리카노 1잔 정가</label><div class="input-line"><input id="coffeePrice" type="number" min="1" step="100" inputmode="numeric" placeholder="정가 입력" aria-describedby="calc-hint"><span>원</span></div></div>
+            <div class="input-card"><label for="mealPrice">도시락·샌드위치 1개 정가</label><div class="input-line"><input id="mealPrice" type="number" min="1" step="100" inputmode="numeric" placeholder="정가 입력" aria-describedby="calc-hint"><span>원</span></div></div>
+            <div class="input-card range-card"><div class="range-top"><label for="coffeeUses">올인원 20회 이용 구성</label><output id="useSplit">커피 10회 · 도시락 10회</output></div><input id="coffeeUses" type="range" min="0" max="20" value="10"><p class="calc-hint" id="calc-hint">올인원 비교는 한 달 총 20회 사용 기준입니다. 커피 횟수를 조정하면 나머지는 도시락 이용 횟수로 계산됩니다.</p></div>
+          </div>
+          <div class="chart" aria-live="polite">
+            <div class="chart-legend"><span class="legend-key"><i class="swatch"></i> 구독 없이 정가로 이용</span><span class="legend-key"><i class="swatch plan"></i> 앱 구독 이용 (할인 + 구독료)</span></div>
+            <div id="chartRows"><div class="chart-placeholder">두 상품의 정가를 입력하면 월 지출 비교 그래프가 나타납니다.</div></div>
+          </div>
+          <p class="calc-note">계산 기준: 커피 20회 또는 도시락 20회, 올인원은 총 20회(슬라이더로 구성 조정). 구독 사용 지출에는 월 구독료를 포함했습니다. 원 단위 정상 판매가는 제공된 자료에 없어 직접 입력하도록 했습니다. 실제 할인은 하루 1회 사용 원칙을 따릅니다.</p>
+        </div>
+      </div>
+    </section>
+    <section class="wrap free-band" id="free-trial" aria-label="첫 달 무료 체험 신청">
+      <div class="free-box"><div><h2>이번 달 구독료는 0원!</h2><p>혜택온으로 등굣길 커피와 점심을 더 가볍게 시작해보세요.</p></div><button class="primary trial-button" type="button">첫 달 무료 체험 시작하기 <span class="free">→</span></button></div>
+    </section>
+    <section class="reviews-section wrap" aria-labelledby="reviews-title">
+      <div class="section-head"><span class="kicker">Campus voices</span><h2 id="reviews-title">혜택온을 써본 사람들의 이야기</h2><p>매일 쓰는 편의점 혜택으로 달라지는 일상.</p></div>
+      <p class="review-disclaimer">아래는 페이지 시안을 위한 가상 후기 예시이며, 실제 이용자 후기가 아닙니다.</p>
+      <div class="reviews">
+        <article class="review"><div class="review-stars" aria-label="별 다섯 개">★★★★★</div><blockquote>“등교할 때 커피를 자주 사는데, 앱 바코드로 바로 할인돼서 편해요.”</blockquote><cite>커피 플랜 · 대학생 가상 후기</cite></article>
+        <article class="review"><div class="review-stars" aria-label="별 다섯 개">★★★★★</div><blockquote>“점심으로 샌드위치 사 먹을 때 꾸준히 할인받으니 구독료가 아깝지 않아요.”</blockquote><cite>도시락 플랜 · 대학생 가상 후기</cite></article>
+        <article class="review"><div class="review-stars" aria-label="별 다섯 개">★★★★★</div><blockquote>“이번 달에 얼마나 아꼈는지 앱에서 확인할 수 있어서 소비를 돌아보게 돼요.”</blockquote><cite>혜택온 이용자 · 가상 후기</cite></article>
+        <article class="review"><div class="review-stars" aria-label="별 다섯 개">★★★★★</div><blockquote>“커피랑 점심 혜택을 한 번에 챙길 수 있어요. 앱 바코드 하나라 사용도 간단해요.”</blockquote><cite>올인원 플랜 · 대학생 가상 후기</cite></article>
+      </div>
+    </section>
+    <section class="section faq-section wrap" aria-labelledby="faq-title">
+      <div class="section-head"><span class="kicker">FAQ</span><h2 id="faq-title">자주 묻는 질문</h2><p>궁금한 질문을 눌러 답변을 확인해보세요.</p></div>
+      <div class="faq-list">
+        <details><summary>해지는 어떻게 하나요?</summary><p>앱의 '내 구독' 화면에서 버튼 한 번으로 즉시 해지됩니다. 남은 기간 혜택은 만료일까지 유지됩니다.</p></details>
+        <details><summary>할인 혜택을 하루에 여러 번 쓸 수 있나요?</summary><p>플랜별로 하루 1회 사용이 원칙이며, 올인원 플랜은 커피 1회와 도시락 1회를 각각 사용할 수 있습니다.</p></details>
+        <details><summary>모든 매장에서 사용할 수 있나요?</summary><p>전국 제휴 매장에서 사용 가능하며, 앱 지도에서 가까운 제휴 매장을 확인할 수 있습니다.</p></details>
+        <details><summary>구독료가 아깝지 않을까요?</summary><p>커피 플랜 기준 월 4회만 사용해도 구독료 이상을 아끼게 됩니다. 앱의 '절약 리포트'가 매달 아낀 금액을 계산해 드립니다.</p></details>
+      </div>
+    </section>
+  </main>
+  <footer><div class="wrap footer-inner"><span class="footer-brand">혜택온 · 매일 아끼는 편의점 구독</span><span>혜택온은 인공지능과경영 수업 실습용 가상 서비스입니다.</span></div></footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="checkout-backdrop" id="checkout" aria-hidden="true">
+    <section class="checkout-dialog" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
+      <button class="checkout-close" id="checkoutClose" type="button" aria-label="결제창 닫기">×</button>
+      <span class="checkout-kicker">CHECKOUT · DEMO</span>
+      <h2 id="checkoutTitle">구독 신청 확인</h2>
+      <div class="checkout-plan"><strong id="checkoutPlan">플랜</strong><span id="checkoutPrice">0원</span></div>
+      <p class="checkout-note" id="checkoutNote">선택한 구독 내용을 확인해 주세요. 이 페이지는 수업 실습용 화면이며 실제 결제는 진행되지 않습니다.</p>
+      <div class="checkout-actions"><button class="checkout-cancel" id="checkoutCancel" type="button">취소</button><button class="checkout-confirm" id="checkoutConfirm" type="button">신청 확인</button></div>
+    </section>
+  </div>
+  <script>
+    const toast = document.getElementById('toast');
+    let toastTimer;
+    const checkout = document.getElementById('checkout');
+    const checkoutPlan = document.getElementById('checkoutPlan');
+    const checkoutPrice = document.getElementById('checkoutPrice');
+    const checkoutTitle = document.getElementById('checkoutTitle');
+    const checkoutNote = document.getElementById('checkoutNote');
+    let pendingPlan = '';
+    let pendingPrice = '';
+    function showToast(message){
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+    function openCheckout(plan, price, isTrial=false){
+      pendingPlan = plan;
+      pendingPrice = price;
+      checkoutPlan.textContent = plan;
+      checkoutPrice.textContent = price;
+      checkoutTitle.textContent = isTrial ? '무료 체험 신청 확인' : '결제창으로 이동';
+      checkoutNote.textContent = isTrial ? '첫 달 무료 체험 신청 내용을 확인해 주세요. 이 페이지는 실습용 화면이며 실제 결제·신청 연동은 없습니다.' : '선택한 구독 플랜과 월 구독료를 확인해 주세요. 이 페이지는 실습용 결제 화면이며 실제 결제는 진행되지 않습니다.';
+      checkout.classList.add('open');
+      checkout.setAttribute('aria-hidden','false');
+      document.getElementById('checkoutClose').focus();
+      document.body.style.overflow='hidden';
+    }
+    function closeCheckout(){
+      checkout.classList.remove('open');
+      checkout.setAttribute('aria-hidden','true');
+      document.body.style.overflow='';
+    }
+    document.querySelectorAll('.subscribe').forEach(button => {
+      button.addEventListener('click', () => openCheckout(button.dataset.plan, button.dataset.price));
+    });
+    document.querySelectorAll('.trial-button').forEach(button => {
+      button.addEventListener('click', () => openCheckout('첫 달 무료 체험','0원',true));
+    });
+    document.getElementById('checkoutClose').addEventListener('click',closeCheckout);
+    document.getElementById('checkoutCancel').addEventListener('click',closeCheckout);
+    checkout.addEventListener('click',event=>{if(event.target===checkout)closeCheckout()});
+    document.addEventListener('keydown',event=>{if(event.key==='Escape'&&checkout.classList.contains('open'))closeCheckout()});
+    document.getElementById('checkoutConfirm').addEventListener('click',()=>{
+      closeCheckout();
+      const message = pendingPlan === '첫 달 무료 체험' ? '첫 달 무료 체험 신청이 접수되었습니다.' : pendingPlan + ' 신청이 접수되었습니다.';
+      showToast(message);
+      pendingPlan=''; pendingPrice='';
+    });
+
+    const coffeePriceInput=document.getElementById('coffeePrice');
+    const mealPriceInput=document.getElementById('mealPrice');
+    const coffeeUsesInput=document.getElementById('coffeeUses');
+    const useSplit=document.getElementById('useSplit');
+    const chartRows=document.getElementById('chartRows');
+    const won=value=>Math.round(value).toLocaleString('ko-KR')+'원';
+    function renderSavings(){
+      const coffee=Number(coffeePriceInput.value);
+      const meal=Number(mealPriceInput.value);
+      const coffeeUses=Number(coffeeUsesInput.value);
+      const mealUses=20-coffeeUses;
+      useSplit.textContent=`커피 ${coffeeUses}회 · 도시락 ${mealUses}회`;
+      if(!(coffee>0&&meal>0)){
+        chartRows.innerHTML='<div class="chart-placeholder">두 상품의 정가를 입력하면 월 지출 비교 그래프가 나타납니다.</div>';
+        return;
+      }
+      const rows=[
+        {name:'커피 플랜 · 20회',full:coffee*20,sub:coffee*20*.6+4900},
+        {name:'도시락 플랜 · 20회',full:meal*20,sub:meal*20*.8+3900},
+        {name:'올인원 플랜 · 20회',full:coffee*coffeeUses+meal*mealUses,sub:coffee*coffeeUses*.6+meal*mealUses*.8+7900}
+      ];
+      const max=Math.max(...rows.flatMap(r=>[r.full,r.sub]),1);
+      chartRows.innerHTML=rows.map((row,index)=>{
+        const difference=row.full-row.sub;
+        const result=difference>=0?`구독 시 ${won(difference)} 절약`:`구독 시 ${won(Math.abs(difference))} 더 지출`;
+        return `<div class="chart-row"><div class="chart-title"><strong>${row.name}</strong><span>${result}</span></div><div class="bar-line"><span>구독 없이</span><div class="bar-track"><div class="bar-fill" style="width:${row.full/max*100}%"></div></div><span class="bar-value">${won(row.full)}</span></div><div class="bar-line"><span>앱 구독</span><div class="bar-track"><div class="bar-fill plan" style="width:${row.sub/max*100}%"></div></div><span class="bar-value">${won(row.sub)}</span></div></div>`;
+      }).join('');
+    }
+    [coffeePriceInput,mealPriceInput,coffeeUsesInput].forEach(input=>input.addEventListener('input',renderSavings));
+  </script>
+</body>
+</html>
